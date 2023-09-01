@@ -1,0 +1,11 @@
+pipelines:
+  default:
+    - step:
+        name: Sync GitHub Mirror
+        image: alpine/git:latest
+        clone:
+          enabled: false
+        script:
+          - git clone --bare git@bitbucket.org:comp3988-th16-03-p39/groundwater_quality.git
+          - cd groundwater_quality.git
+          - git push --mirror git@github.com:comp3988-th16-03-p39/groundwater_quality.git
