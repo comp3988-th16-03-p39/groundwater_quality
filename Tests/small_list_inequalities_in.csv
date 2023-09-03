@@ -1,0 +1,16 @@
+﻿SampleID,DateCollected,ChemicalName,Amount,UOM,MinDetectLimit
+1,23/05/2020,Calcium,0.005,mg/L,100
+1,23/05/2020,Calcium,0.1,mg/L,100
+1,23/05/2020,Water Temperature,1,°C,100
+1,23/05/2020,Chloride,2,g/L,100
+3,16/07/1999,Water Temperature,3,°C,100
+3,16/07/1999,Water Temperature,<20,°C,100
+3,16/07/1999,Calcium,0.01,ug/L,100
+3,16/07/1999,Chloride,5.55,g/L,100
+5,15/04/2003,Chloride,14,ng/L,100
+5,15/04/2003,Water Temperature,100,°F,100
+5,15/04/2003,Calcium,6.7,ng/L,100
+7,1/01/1995,Chloride,<12,g/L,100
+7,1/01/1995,Chloride,<100,g/L,100
+7,1/01/1995,Water Temperature,11.2,°F,100
+7,1/01/1995,Calcium,0.97,mg/L,100
