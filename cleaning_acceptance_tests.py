@@ -256,15 +256,89 @@ def small_complex ():
         convert_to_standard
     )
 
+def gen_large_complete_in ():
+    data = dict()
+    data['columns'] = ["SampleID", "DateCollected", "ChemicalName", "Amount", "MinDetectLimit", "UOM"]
+
+    desired_chemical_names = ['Calcium', 'Chloride', 'Water Temperature']
+    desired_units = ['g/L','g/L','°c']
+
+    def get_sample_rows (SampleID):
+        sample_rows = [[SampleID, '23/05/19', desired_chemical_names[i], 1, 0, desired_units[i]] for i in range(0,len(desired_chemical_names))]
+        return sample_rows
+    
+    num_samples = 100000
+    data['data'] = []
+    for i in range(0,num_samples):
+        data['data'].extend(get_sample_rows(i))
+    
+    data['index'] = list(range(0,num_samples))*len(desired_chemical_names)
+    data['index_names'] = ['']
+    data['column_names'] = ['']
+
+    df = pd.DataFrame.from_dict(data,  orient='tight')
+    df.to_csv("Tests/large_complete_in.csv", index=False, encoding="utf-8-sig")
+
+def gen_large_complete_out ():
+    data = dict()
+    data['columns'] = [("SampleID",""), ("DateCollected","")]
+
+    desired_chemical_names = ['Calcium', 'Chloride', 'Water Temperature']
+    data['columns'].append(('Calcium', "Amount"))
+    data['columns'].append(('Calcium', "Prefix"))
+    data['columns'].append(('Chloride', "Amount"))
+    data['columns'].append(('Chloride', "Prefix"))
+    data['columns'].append(('Water Temperature', "Amount"))
+    data['columns'].append(('Water Temperature', "Prefix"))
+
+    def get_sample_row (SampleID, num_chemicals):
+        sample_rows = [SampleID, '23/05/19']
+        sample_rows.extend([1, '=']*num_chemicals)
+        return sample_rows
+    
+    num_samples = 100000
+    data['data'] = []
+    for i in range(0,num_samples):
+        data['data'].extend([get_sample_row(i, len(desired_chemical_names))])
+    
+    data['index'] = list(range(0,num_samples))
+    data['index_names'] = ['']
+    data['column_names'] = ['','']
+
+    df = pd.DataFrame.from_dict(data,  orient='tight')
+    df.to_csv("Tests/large_complete_out.csv", index=False, encoding="utf-8-sig")
+
+def large_complete ():
+    # Data Complete. No inequalities.
+    # Units consistent.
+    desired_chemical_names = ["Calcium", "Chloride", "Water Temperature"]
+    test_path = "Tests/large_complete"
+    sample_id_columns = "SampleID"
+    chemical_name_column = "ChemicalName"
+    per_sample_data = "DateCollected"
+    na_threshold = -1
+
+    test_dataset (
+        test_path,
+        sample_id_columns,
+        desired_chemical_names,
+        chemical_name_column, 
+        per_sample_data,
+        na_threshold, 
+        convert_to_standard
+    )
+    
+
 
     
 
-small_complete ()
-small_incomplete_1 ()
-small_incomplete_2 ()
-small_incomplete_3 ()
-small_inequalities ()
-small_non_numeric ()
-small_list ()
-small_list_inequalities ()
-small_complex ()
+# small_complete ()
+# small_incomplete_1 ()
+# small_incomplete_2 ()
+# small_incomplete_3 ()
+# small_inequalities ()
+# small_non_numeric ()
+# small_list ()
+# small_list_inequalities ()
+# small_complex ()
+gen_large_complete_out ()
