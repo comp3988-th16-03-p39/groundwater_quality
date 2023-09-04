@@ -87,7 +87,7 @@ def small_incomplete_1 ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -133,7 +133,7 @@ def small_incomplete_3 ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = 1000
+    na_threshold = -1
 
     test_dataset (
         test_path,
@@ -154,7 +154,7 @@ def small_inequalities ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -176,7 +176,7 @@ def small_non_numeric ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -197,7 +197,7 @@ def small_list ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -219,7 +219,7 @@ def small_list_inequalities ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -244,7 +244,7 @@ def small_complex ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -316,7 +316,7 @@ def large_complete ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
 
     test_dataset (
         test_path,

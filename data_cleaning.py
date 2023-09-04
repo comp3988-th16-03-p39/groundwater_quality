@@ -152,7 +152,7 @@ def filter_rows_by_nas (df, desired_chemical_names, na_threshold):
     df = df.reindex(sorted(df.columns), axis=1)
     amounts_index = list(itt.product(desired_chemical_names, ["Amount"]))
     mask = df[amounts_index].apply(count_nas, axis=1)
-    mask = mask[mask > na_threshold].index
+    mask = mask[mask <= na_threshold].index
 
     df = df.loc[mask]
     df.reset_index(inplace=True)
