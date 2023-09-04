@@ -46,7 +46,7 @@ def test_dataset (
 
     dc.clean_dataset_units (df, desired_chemical_names)
     dc.format_dataset_amount (df, desired_chemical_names)
-    dc.standardise_dataset_unit (df, desired_chemical_names, convert_to_standard)
+    dc.standardise_dataset_unit (df, desired_chemical_names, convert_to_standard, erase_invalid = True)
     dc.drop_units_min_detect(df, desired_chemical_names)
     dc.agg_dataset_measurement (df, desired_chemical_names)
     df = dc.filter_rows_by_nas (df, desired_chemical_names, na_threshold)
@@ -65,7 +65,29 @@ def small_complete ():
     sample_id_columns = "SampleID"
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
-    na_threshold = -1
+    na_threshold = 1000
+
+    test_dataset (
+        test_path,
+        sample_id_columns,
+        desired_chemical_names,
+        chemical_name_column, 
+        per_sample_data,
+        na_threshold, 
+        convert_to_standard
+    )
+
+def small_complete_whitespace ():
+    # Data is complete. No missing values. Inequalities.
+    # Units are inconsistent.
+    # Whitespace in units and amount.
+
+    desired_chemical_names = ["Calcium", "Chloride", "Water Temperature"]
+    test_path = "Tests/small_complete_whitespace"
+    sample_id_columns = "SampleID"
+    chemical_name_column = "ChemicalName"
+    per_sample_data = "DateCollected"
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -134,6 +156,50 @@ def small_incomplete_3 ():
     chemical_name_column = "ChemicalName"
     per_sample_data = "DateCollected"
     na_threshold = -1
+
+    test_dataset (
+        test_path,
+        sample_id_columns,
+        desired_chemical_names,
+        chemical_name_column, 
+        per_sample_data,
+        na_threshold, 
+        convert_to_standard
+    )
+
+def small_invalid ():
+    # Data is complete. No inequalities.
+    # Units are consistent.
+    # There is an unparseable amount.
+
+    desired_chemical_names = ["Calcium", "Chloride", "Water Temperature"]
+    test_path = "Tests/small_invalid"
+    sample_id_columns = "SampleID"
+    chemical_name_column = "ChemicalName"
+    per_sample_data = "DateCollected"
+    na_threshold = 1000
+
+    test_dataset (
+        test_path,
+        sample_id_columns,
+        desired_chemical_names,
+        chemical_name_column, 
+        per_sample_data,
+        na_threshold, 
+        convert_to_standard
+    )
+
+def small_invalid_list ():
+    # Data is complete. No inequalities.
+    # Units are consistent.
+    # There is an unparseable amount in a duplicate measurement.
+
+    desired_chemical_names = ["Calcium", "Chloride", "Water Temperature"]
+    test_path = "Tests/small_invalid_list"
+    sample_id_columns = "SampleID"
+    chemical_name_column = "ChemicalName"
+    per_sample_data = "DateCollected"
+    na_threshold = 1000
 
     test_dataset (
         test_path,
@@ -333,6 +399,7 @@ def large_complete ():
     
 
 small_complete ()
+small_complete_whitespace ()
 small_incomplete_1 ()
 small_incomplete_2 ()
 small_incomplete_3 ()
@@ -341,4 +408,6 @@ small_non_numeric ()
 small_list ()
 small_list_inequalities ()
 small_complex ()
-large_complete ()
+small_invalid ()
+small_invalid_list ()
+#large_complete ()
