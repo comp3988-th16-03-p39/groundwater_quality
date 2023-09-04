@@ -332,13 +332,13 @@ def large_complete ():
 
     
 
-# small_complete ()
-# small_incomplete_1 ()
-# small_incomplete_2 ()
-# small_incomplete_3 ()
-# small_inequalities ()
-# small_non_numeric ()
-# small_list ()
-# small_list_inequalities ()
-# small_complex ()
-gen_large_complete_out ()
+small_complete ()
+small_incomplete_1 ()
+small_incomplete_2 ()
+small_incomplete_3 ()
+small_inequalities ()
+small_non_numeric ()
+small_list ()
+small_list_inequalities ()
+small_complex ()
+large_complete ()
