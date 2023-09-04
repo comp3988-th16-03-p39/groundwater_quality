@@ -95,6 +95,17 @@ class TestUtilMethods (unittest.TestCase):
         self.assertEqual (list(df["X"]),[12,8])
         self.assertEqual (list(df["B","Y"])[0],['<2'])
         self.assertEqual (list(df["B","Y"])[1],['<0.01','<0.02'])
+        self.assertEqual (list(df["B","Z"])[1],['g/L','g/L'])
+    
+    def test_transform (self):
+        pass
+    
+    def test_clean_units (self):
+        # Test single value version, not dataset version
+        pass
+
+    def test_format_amount (self):
+        pass
 
 
 if __name__ == '__main__':
