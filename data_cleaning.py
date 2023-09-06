@@ -80,7 +80,7 @@ def format_dataset_amount (df, desired_chemical_names):
 
 # standardise units
 
-def standardise_units(units_dict):
+def standardise_units(units_dict, erase_invalid = False):
 
     def standardise_units_func(amount, min_detection_limit, prefix, uom):
 
@@ -88,16 +88,19 @@ def standardise_units(units_dict):
             if math.isnan(uom):
                 return (np.nan, np.nan, np.nan, np.nan)
         if not (uom in units_dict.keys()):
-            raise ValueError('Invalid units', uom)
+            if not erase_invalid:
+                raise ValueError('Invalid units', uom)
+            else:
+                return (np.nan,np.nan,np.nan,np.nan)
         amount = units_dict[uom](amount)
         min_detection_limit = units_dict[uom](min_detection_limit)
         return (amount, min_detection_limit, prefix, uom)
     return standardise_units_func
 
-def standardise_dataset_unit (df, desired_chemical_names, convert_to_standard):
+def standardise_dataset_unit (df, desired_chemical_names, convert_to_standard, erase_invalid = False):
 
     for chemical_name in desired_chemical_names:
-        transform_chemical_data(df, chemical_name, standardise_units(convert_to_standard),
+        transform_chemical_data(df, chemical_name, standardise_units(convert_to_standard, erase_invalid),
                                 ["Amount", "MinDetectLimit", "Prefix", "UOM"], ["Amount", "MinDetectLimit", "Prefix", "UOM"], split_lists=True)
         df.sort_index(axis=1, inplace=True)
 
@@ -152,7 +155,7 @@ def filter_rows_by_nas (df, desired_chemical_names, na_threshold):
     df = df.reindex(sorted(df.columns), axis=1)
     amounts_index = list(itt.product(desired_chemical_names, ["Amount"]))
     mask = df[amounts_index].apply(count_nas, axis=1)
-    mask = mask[mask > na_threshold].index
+    mask = mask[mask <= na_threshold].index
 
     df = df.loc[mask]
     df.reset_index(inplace=True)

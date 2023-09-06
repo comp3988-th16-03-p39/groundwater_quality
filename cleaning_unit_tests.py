@@ -1,8 +1,9 @@
 import unittest
 import pandas as pd
+import numpy as np
 import math
 from cleaning_utils import pivot_dataset, transform_chemical_data
-import data_cleaning
+import data_cleaning as dc
 
 
 class TestUtilMethods (unittest.TestCase):
